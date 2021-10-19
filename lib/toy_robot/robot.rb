@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require 'byebug'
 
 module ToyRobot
   class Robot
@@ -26,6 +25,10 @@ module ToyRobot
       end
     end
 
+    def report
+      "#{x},#{y},#{facing}"
+    end
+
     def turn_left
       new_facing_index = DIRECTIONS.find_index(facing) - 1
 
@@ -38,16 +41,10 @@ module ToyRobot
       turn(new_facing_index)
     end
 
-    def position
-      "#{x},#{y}"
-    end
-
     private
 
     def turn(new_facing_index)
-      @facing = if new_facing_index.negative?
-                  DIRECTIONS.last
-                elsif new_facing_index >= DIRECTIONS.length
+      @facing = if new_facing_index >= DIRECTIONS.length
                   DIRECTIONS.first
                 else
                   DIRECTIONS[new_facing_index]
