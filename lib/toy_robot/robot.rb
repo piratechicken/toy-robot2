@@ -1,7 +1,10 @@
 # frozen_string_literal: true
+require 'byebug'
 
 module ToyRobot
   class Robot
+    DIRECTIONS = %w[NORTH EAST SOUTH WEST].freeze
+
     attr_reader :x, :y, :facing
 
     def initialize(x, y, facing)
@@ -24,33 +27,31 @@ module ToyRobot
     end
 
     def turn_left
-      case facing
-      when 'NORTH'
-        @facing = 'WEST'
-      when 'SOUTH'
-        @facing = 'EAST'
-      when 'EAST'
-        @facing = 'NORTH'
-      when 'WEST'
-        @facing = 'SOUTH'
-      end
+      new_facing_index = DIRECTIONS.find_index(facing) - 1
+
+      turn(new_facing_index)
     end
 
     def turn_right
-      case facing
-      when 'NORTH'
-        @facing = 'EAST'
-      when 'SOUTH'
-        @facing = 'WEST'
-      when 'EAST'
-        @facing = 'SOUTH'
-      when 'WEST'
-        @facing = 'NORTH'
-      end
+      new_facing_index = DIRECTIONS.find_index(facing) + 1
+
+      turn(new_facing_index)
     end
 
     def position
-      "#{@x},#{@y}"
+      "#{x},#{y}"
+    end
+
+    private
+
+    def turn(new_facing_index)
+      @facing = if new_facing_index.negative?
+                  DIRECTIONS.last
+                elsif new_facing_index >= DIRECTIONS.length
+                  DIRECTIONS.first
+                else
+                  DIRECTIONS[new_facing_index]
+                end
     end
   end
 end
