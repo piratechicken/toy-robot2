@@ -3,8 +3,10 @@ AllCops:
   TargetRubyVersion: 3.0.1
 
 Style/Documentation:
-  Description: 'Document classes and non-namespace modules.'
   Enabled: false
 
 Naming/MethodParameterName:
+  Enabled: false
+
+Metrics/BlockLength:
   Enabled: false

@@ -46,4 +46,80 @@ RSpec.describe ToyRobot::Robot do
       end
     end
   end
+
+  describe '#turn_left' do
+    it 'turns to the WEST' do
+      subject.turn_left
+
+      expect(subject.facing).to eq('WEST')
+    end
+
+    context 'when it is facing EAST' do
+      let(:facing) { 'EAST' }
+
+      it 'turns to the NORTH' do
+        subject.turn_left
+
+        expect(subject.facing).to eq('NORTH')
+      end
+    end
+
+    context 'when it is facing SOUTH' do
+      let(:facing) { 'SOUTH' }
+
+      it 'turns to the EAST' do
+        subject.turn_left
+
+        expect(subject.facing).to eq('EAST')
+      end
+    end
+
+    context 'when it is facing WEST' do
+      let(:facing) { 'WEST' }
+
+      it 'turns to the SOUTH' do
+        subject.turn_left
+
+        expect(subject.facing).to eq('SOUTH')
+      end
+    end
+  end
+
+  describe '#turn_right' do
+    it 'turns to the EAST' do
+      subject.turn_right
+
+      expect(subject.facing).to eq('EAST')
+    end
+
+    context 'when it is facing EAST' do
+      let(:facing) { 'EAST' }
+
+      it 'turns to the SOUTH' do
+        subject.turn_right
+
+        expect(subject.facing).to eq('SOUTH')
+      end
+    end
+
+    context 'when it is facing SOUTH' do
+      let(:facing) { 'SOUTH' }
+
+      it 'turns to the WEST' do
+        subject.turn_right
+
+        expect(subject.facing).to eq('WEST')
+      end
+    end
+
+    context 'when it is facing WEST' do
+      let(:facing) { 'WEST' }
+
+      it 'turns to the NORTH' do
+        subject.turn_right
+
+        expect(subject.facing).to eq('NORTH')
+      end
+    end
+  end
 end
