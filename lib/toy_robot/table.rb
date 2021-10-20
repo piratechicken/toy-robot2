@@ -2,7 +2,9 @@
 
 module ToyRobot
   class Table
-    def initialize(size = 5)
+    DEFAULT_SIZE = 5
+
+    def initialize(size = DEFAULT_SIZE)
       @x_y_range = 0...size
     end
 
