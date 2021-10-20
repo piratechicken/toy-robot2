@@ -12,6 +12,10 @@ module ToyRobot
       @facing = facing
     end
 
+    def self.valid_facing?(facing)
+      DIRECTIONS.include?(facing)
+    end
+
     def move
       case facing
       when 'NORTH'

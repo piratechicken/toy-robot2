@@ -7,6 +7,22 @@ RSpec.describe ToyRobot::Robot do
   let(:y) { 0 }
   let(:facing) { 'NORTH' }
 
+  describe '.valid_facing?' do
+    let(:facing) { 'NORTH' }
+
+    it 'returns true' do
+      expect(described_class.valid_facing?(facing)).to be true
+    end
+
+    context 'with an invalid facing' do
+      let(:facing) { 'north' }
+
+      it 'returns false' do
+        expect(described_class.valid_facing?(facing)).to be false
+      end
+    end
+  end
+
   describe '#move' do
     it 'moves four spaces up' do
       4.times { subject.move }
@@ -16,14 +32,13 @@ RSpec.describe ToyRobot::Robot do
     end
 
     context 'when facing SOUTH' do
-      let(:y) { 4 }
       let(:facing) { 'SOUTH' }
 
       it 'moves three spaces down' do
         3.times { subject.move }
 
         expect(subject.x).to eq(0)
-        expect(subject.y).to eq(1)
+        expect(subject.y).to eq(-3)
       end
     end
 
@@ -39,13 +54,12 @@ RSpec.describe ToyRobot::Robot do
     end
 
     context 'when facing WEST' do
-      let(:x) { 3 }
       let(:facing) { 'WEST' }
 
       it 'moves one space left' do
         subject.move
 
-        expect(subject.x).to eq(2)
+        expect(subject.x).to eq(-1)
         expect(subject.y).to eq(0)
       end
     end
