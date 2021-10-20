@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module ToyRobot
-  class Brain
+  class Simulator
     def initialize
       @table = Table.new
     end

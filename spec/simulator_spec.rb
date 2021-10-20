@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe ToyRobot::Brain do
-  subject { ToyRobot::Brain.new }
+RSpec.describe ToyRobot::Simulator do
+  subject { ToyRobot::Simulator.new }
 
   describe '#report' do
     it 'reports that there is no robot' do
