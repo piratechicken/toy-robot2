@@ -6,17 +6,31 @@ module ToyRobot
       @table = Table.new
     end
 
-    def place_robot(x, y, facing)
+    def place(x, y, facing)
       return unless valid_placement?(x, y, facing)
 
       @robot = Robot.new(x, y, facing)
     end
 
-    def report
-      return 'No robot placed' if @robot.nil?
-
-      @robot.report
+    def left
+      drive_robot(:left)
     end
+
+    def right
+      drive_robot(:right)
+    end
+
+    def move
+      drive_robot(:move)
+    end
+
+    def report
+      report = @robot.nil? ? 'No robot placed' : @robot.report
+
+      puts report
+    end
+
+    private
 
     def drive_robot(command)
       return if @robot.nil?
@@ -25,20 +39,10 @@ module ToyRobot
       when :move
         robot_move
       when :left
-        robot_left
+        @robot.turn_left
       when :right
-        robot_right
+        @robot.turn_right
       end
-    end
-
-    private
-
-    def robot_left
-      @robot.turn_left
-    end
-
-    def robot_right
-      @robot.turn_right
     end
 
     def robot_move

@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
-require 'toy_robot/Simulator'
-require 'toy_robot/robot'
-require 'toy_robot/table'
+require_relative './toy_robot/file_command'
+require_relative './toy_robot/robot'
+require_relative './toy_robot/simulator'
+require_relative './toy_robot/table'
 
 module ToyRobot
 end
