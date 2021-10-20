@@ -42,7 +42,7 @@ module ToyRobot
     end
 
     def robot_move
-      # return unless @table.valid_position?(x, y)
+      return unless @table.valid_position?(*@robot.project_move)
 
       @robot.move
     end

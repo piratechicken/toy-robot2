@@ -16,17 +16,21 @@ module ToyRobot
       DIRECTIONS.include?(facing)
     end
 
-    def move
+    def project_move
       case facing
       when 'NORTH'
-        @y += 1
+        [x, y + 1]
       when 'SOUTH'
-        @y -= 1
+        [x, y - 1]
       when 'EAST'
-        @x += 1
+        [x + 1, y]
       when 'WEST'
-        @x -= 1
+        [x - 1, y]
       end
+    end
+
+    def move
+      @x, @y = project_move
     end
 
     def report

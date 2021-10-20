@@ -1,5 +1,4 @@
 # frozen_string_literal: true
-require 'byebug'
 
 RSpec.describe ToyRobot::Brain do
   subject { ToyRobot::Brain.new }
@@ -57,10 +56,48 @@ RSpec.describe ToyRobot::Brain do
     end
   end
 
-  context 'it ignores other commands prior to valid place'
-  context 'report'
-  context 'move'
-  context 'invalid move'
-  context 'turn left'
-  context 'turn right'
+  describe '#drive_robot' do
+    let(:command) { :left }
+
+    it 'does nothing' do
+      subject.drive_robot(command)
+
+      expect(subject.report).to eq('No robot placed')
+    end
+
+    context 'with a placed robot' do
+      before do
+        subject.place_robot(1, 3, 'EAST')
+        3.times { subject.drive_robot(command) }
+      end
+
+      it 'turns left three times' do
+        expect(subject.report).to eq('1,3,SOUTH')
+      end
+
+      context 'with a right command' do
+        let(:command) { :right }
+
+        it 'turns right three times' do
+          expect(subject.report).to eq('1,3,NORTH')
+        end
+      end
+
+      context 'with a move command' do
+        let(:command) { :move }
+
+        it 'moves' do
+          expect(subject.report).to eq('4,3,EAST')
+        end
+
+        context 'with a move command that will make it fall off the table' do
+          it 'ignores the move command' do
+            subject.drive_robot(command)
+
+            expect(subject.report).to eq('4,3,EAST')
+          end
+        end
+      end
+    end
+  end
 end
